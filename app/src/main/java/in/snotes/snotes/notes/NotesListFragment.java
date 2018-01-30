@@ -1,4 +1,4 @@
-package in.snotes.snotes;
+package in.snotes.snotes.notes;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -14,6 +14,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import in.snotes.snotes.R;
 
 public class NotesListFragment extends Fragment {
 

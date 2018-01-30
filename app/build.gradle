@@ -34,6 +34,7 @@ dependencies {
 
     // butterknife
     implementation 'com.jakewharton:butterknife:8.8.1'
+    implementation 'com.google.firebase:firebase-auth:11.0.4'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
     // knife edit text
@@ -47,3 +48,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 }
+
+
+apply plugin: 'com.google.gms.google-services'

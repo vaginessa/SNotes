@@ -1,4 +1,4 @@
-package in.snotes.snotes;
+package in.snotes.snotes.notes;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,23 +12,47 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import in.snotes.snotes.R;
+import in.snotes.snotes.auth.AuthActivity;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, NotesListFragment.NotesListFragmentListener {
+
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.nav_view)
+    NavigationView navigationView;
+    @BindView(R.id.drawer_layout)
+    DrawerLayout drawer;
+
+    private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        ButterKnife.bind(this);
+
+        FirebaseUser user = mFirebaseAuth.getCurrentUser();
+        if (user == null) {
+            Intent i = new Intent(this, AuthActivity.class);
+            startActivity(i);
+            finish();
+            return;
+        }
+
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         if (savedInstanceState == null) {
@@ -67,6 +91,11 @@ public class MainActivity extends AppCompatActivity
             return true;
         }
 
+        if (id == R.id.action_logout) {
+            logoutUser();
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -99,5 +128,13 @@ public class MainActivity extends AppCompatActivity
     public void onFabClicked() {
         Intent i = new Intent(MainActivity.this, AddNotesActivity.class);
         startActivity(i);
+    }
+
+    private void logoutUser() {
+        mFirebaseAuth.signOut();
+        Intent i = new Intent(MainActivity.this, AuthActivity.class);
+        startActivity(i);
+        finish();
+        return;
     }
 }

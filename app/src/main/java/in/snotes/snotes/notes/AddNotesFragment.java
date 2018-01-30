@@ -1,4 +1,4 @@
-package in.snotes.snotes;
+package in.snotes.snotes.notes;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import in.snotes.snotes.R;
 import io.github.mthli.knife.KnifeText;
 
 public class AddNotesFragment extends Fragment {
@@ -84,6 +86,15 @@ public class AddNotesFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
+    }
+
+    public void saveToDatabase(){
+        String title = titleNotesAdd.getText().toString().trim();
+        String content = knife.toHtml().trim();
+
+        Log.d(TAG,"title is "+title);
+        Log.d(TAG,"Content is "+content);
+
     }
 
     @OnClick({R.id.bold, R.id.italic, R.id.underline, R.id.strikethrough, R.id.bullet, R.id.quote, R.id.link, R.id.clear, R.id.undo, R.id.redo})
