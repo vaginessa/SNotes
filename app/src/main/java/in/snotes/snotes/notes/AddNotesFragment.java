@@ -8,7 +8,6 @@ import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -51,6 +50,7 @@ public class AddNotesFragment extends Fragment {
     KnifeText knife;
     Unbinder unbinder;
 
+
     private static final String TAG = "AddNotesFragment";
 
     @Override
@@ -83,17 +83,18 @@ public class AddNotesFragment extends Fragment {
         unbinder.unbind();
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }
 
-    public void saveToDatabase(){
+    public void saveToDatabase() {
         String title = titleNotesAdd.getText().toString().trim();
         String content = knife.toHtml().trim();
 
-        Log.d(TAG,"title is "+title);
-        Log.d(TAG,"Content is "+content);
+        Log.d(TAG, "title is " + title);
+        Log.d(TAG, "Content is " + content);
+
+        if (TextUtils.isEmpty(title) && TextUtils.isEmpty(content)) {
+            return;
+        }
+
 
     }
 
@@ -131,6 +132,7 @@ public class AddNotesFragment extends Fragment {
                 knife.redo();
                 break;
         }
+
     }
 
     private void showLinkDialog() {

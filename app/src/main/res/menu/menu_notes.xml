@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/action_lock"
+        android:icon="@drawable/ic_lock_open"
+        android:title="Lock"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_star"
+        android:icon="@drawable/ic_star_open"
+        android:title="Star"
+        app:showAsAction="always" />
+
+
+    <item
+        android:id="@+id/action_color_choser"
+        android:icon="@drawable/ic_color_choser"
+        android:title="Color Choser"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_archive"
+        android:icon="@drawable/ic_archive"
+        android:title="Archive"
+        app:showAsAction="always" />
+
+
+    <item
+        android:id="@+id/action_menu"
+        android:icon="@drawable/ic_menu"
+        android:title="Menu"
+        app:showAsAction="always" />
+
+
+</menu>

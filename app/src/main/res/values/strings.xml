@@ -8,4 +8,6 @@
     <string name="logo_of_snotes">Logo of SNotes</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
+    <string name="color_title">Choose a color</string>
+    <string name="colors">choose a color</string>
 </resources>

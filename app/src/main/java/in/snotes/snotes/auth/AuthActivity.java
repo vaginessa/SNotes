@@ -2,17 +2,14 @@ package in.snotes.snotes.auth;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import in.snotes.snotes.R;
+import in.snotes.snotes.UserRegistrationService;
 import in.snotes.snotes.notes.MainActivity;
 
 public class AuthActivity extends AppCompatActivity implements AuthFragment.AuthListener, LoginFragment.LoginListener, RegisterFragment.RegisterListener {
@@ -84,15 +81,23 @@ public class AuthActivity extends AppCompatActivity implements AuthFragment.Auth
 
     @Override
     public void registerUser(String name, String email, String password) {
-        mAuth.createUserWithEmailAndPassword(email,password)
+        mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()){
+                    if (task.isSuccessful()) {
                         // start the IntentService
+                        startRegistrationService(name, task.getResult().getUser().getUid());
                         goToMainActivity();
-                    }else{
-                        Log.e(TAG,"Error registering user "+task.getException().getMessage());
+                    } else {
+                        Log.e(TAG, "Error registering user " + task.getException().getMessage());
                     }
                 });
+    }
+
+    private void startRegistrationService(String name, String uid) {
+        Intent i = new Intent(AuthActivity.this, UserRegistrationService.class);
+        i.putExtra("user-uid", uid);
+        i.putExtra("user-name", name);
+        startService(i);
     }
 
     private void navToLogin() {
@@ -104,6 +109,6 @@ public class AuthActivity extends AppCompatActivity implements AuthFragment.Auth
 
     @Override
     public void userIsAlreadyRegistered() {
-       navToLogin();
+        navToLogin();
     }
 }

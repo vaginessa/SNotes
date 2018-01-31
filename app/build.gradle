@@ -9,6 +9,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -19,6 +20,9 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    dexOptions {
+        javaMaxHeapSize "4g"
     }
 }
 
@@ -34,14 +38,24 @@ dependencies {
 
     // butterknife
     implementation 'com.jakewharton:butterknife:8.8.1'
-    implementation 'com.google.firebase:firebase-auth:11.0.4'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
+    //firebase firestore
+    compile 'com.google.firebase:firebase-firestore:11.8.0'
+
+    // firebase auth
+    implementation 'com.google.firebase:firebase-auth:11.8.0'
     // knife edit text
     implementation 'com.github.mthli:Knife:v1.1'
 
     // material dialogs
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
+    implementation 'com.afollestad.material-dialogs:commons:0.9.6.0'
+
+    //stetho
+    implementation 'com.facebook.stetho:stetho:1.5.0'
+
+    implementation 'com.android.support:multidex:1.0.2'
 
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'

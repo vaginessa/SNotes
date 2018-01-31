@@ -3,6 +3,7 @@
     package="in.snotes.snotes">
 
     <application
+        android:name=".SNotesApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -23,6 +24,8 @@
             android:name=".notes.AddNotesActivity"
             android:windowSoftInputMode="stateVisible" />
         <activity android:name=".auth.AuthActivity"></activity>
+
+        <service android:name=".UserRegistrationService" />
     </application>
 
 </manifest>
