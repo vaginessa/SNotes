@@ -1,9 +1,12 @@
 package in.snotes.snotes.notes;
 
+import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
@@ -14,6 +17,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
@@ -64,7 +68,6 @@ public class AddNotesFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_notes_add, container, false);
         unbinder = ButterKnife.bind(this, v);
-        getAddNotesActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         return v;
     }
 
@@ -149,4 +152,40 @@ public class AddNotesFragment extends Fragment {
                     knife.link(input.toString(), start, end);
                 }).show();
     }
+
+    public void changeColor(int color) {
+
+        ImageView[] views = {
+                getAddNotesActivity().findViewById(R.id.undo),
+                getAddNotesActivity().findViewById(R.id.redo),
+                getAddNotesActivity().findViewById(R.id.bold),
+                getAddNotesActivity().findViewById(R.id.italic),
+                getAddNotesActivity().findViewById(R.id.underline),
+                getAddNotesActivity().findViewById(R.id.strikethrough),
+                getAddNotesActivity().findViewById(R.id.bullet),
+                getAddNotesActivity().findViewById(R.id.quote),
+                getAddNotesActivity().findViewById(R.id.link),
+                getAddNotesActivity().findViewById(R.id.clear)
+        };
+
+        for (ImageView view : views) {
+            tintIcon(view, color);
+        }
+
+        EditText edt_title = getAddNotesActivity().findViewById(R.id.title_notes_add);
+        edt_title.setTextColor(color);
+        edt_title.setHintTextColor(color);
+
+    }
+
+    public void tintIcon(ImageView imageView, int color) {
+        Context context = getAddNotesActivity();
+
+        Drawable normalDrawable = imageView.getDrawable();
+        Drawable wrapDrawable = DrawableCompat.wrap(normalDrawable);
+
+        DrawableCompat.setTint(wrapDrawable, color);
+        imageView.setImageDrawable(wrapDrawable);
+    }
+
 }

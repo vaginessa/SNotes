@@ -83,10 +83,25 @@ public class AddNotesActivity extends AppCompatActivity implements ColorChooserD
     }
 
     private void star() {
-
+        MenuItem starItem = menu.findItem(R.id.action_star);
+        if (isStarred) {
+            starItem.setIcon(R.drawable.ic_star_open);
+        } else {
+            starItem.setIcon(R.drawable.ic_star_closed);
+        }
+        tintMenuIcon(starItem, color);
+        isStarred = !isStarred;
     }
 
     private void lock() {
+        MenuItem lockItem = menu.findItem(R.id.action_lock);
+        if (isLocked) {
+            lockItem.setIcon(R.drawable.ic_lock_open);
+        } else {
+            lockItem.setIcon(R.drawable.ic_lock_black);
+        }
+        tintMenuIcon(lockItem, color);
+        isLocked = !isLocked;
     }
 
     private void showColorChoser() {
@@ -126,17 +141,6 @@ public class AddNotesActivity extends AppCompatActivity implements ColorChooserD
         item.setIcon(wrapDrawable);
     }
 
-    public void tintIcon(int iconId, int color) {
-        Context context = AddNotesActivity.this;
-        ImageView imageView = findViewById(iconId);
-
-        Drawable normalDrawable = imageView.getDrawable();
-        Drawable wrapDrawable = DrawableCompat.wrap(normalDrawable);
-
-        DrawableCompat.setTint(wrapDrawable, context.getResources().getColor(color));
-        imageView.setImageDrawable(wrapDrawable);
-    }
-
     @Override
     public void onColorSelection(@NonNull ColorChooserDialog dialog, int selectedColor) {
         Log.d(TAG, "Color selected is " + selectedColor);
@@ -156,7 +160,9 @@ public class AddNotesActivity extends AppCompatActivity implements ColorChooserD
         tintMenuIcon(menu.findItem(R.id.action_lock), color);
         tintMenuIcon(menu.findItem(R.id.action_star), color);
         tintMenuIcon(menu.findItem(R.id.action_menu), color);
-//        tintMenuIcon(menu.findItem(android.R.id.home), color);
+//      tintMenuIcon(menu.findItem(android.R.id.home), color);
 
+        AddNotesFragment addNotesFragment = (AddNotesFragment) getSupportFragmentManager().findFragmentByTag("add-notes-fragment");
+        addNotesFragment.changeColor(color);
     }
 }
