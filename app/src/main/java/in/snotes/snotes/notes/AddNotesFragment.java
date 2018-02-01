@@ -26,6 +26,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import in.snotes.snotes.R;
+import in.snotes.snotes.model.Note;
 import io.github.mthli.knife.KnifeText;
 
 public class AddNotesFragment extends Fragment {
@@ -54,8 +55,34 @@ public class AddNotesFragment extends Fragment {
     KnifeText knife;
     Unbinder unbinder;
 
+    private AddNotesListener mListener;
 
     private static final String TAG = "AddNotesFragment";
+
+    public static final String ACTION_NEW_NOTE = "action-new-note";
+    public static final String ACTION_EDIT_NOTE = "action-edit-note";
+
+    private static String CURRENT_ACTION;
+
+    public static AddNotesFragment getInstance(String action, Note note) {
+        AddNotesFragment addNotesFragment = new AddNotesFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("note", note);
+        bundle.putString("action", action);
+        addNotesFragment.setArguments(bundle);
+        return addNotesFragment;
+    }
+
+    public static AddNotesFragment getInstance(String action) {
+        AddNotesFragment addNotesFragment = new AddNotesFragment();
+
+        Bundle args = new Bundle();
+        args.putString("action", action);
+        addNotesFragment.setArguments(args);
+
+        return addNotesFragment;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -73,7 +100,28 @@ public class AddNotesFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+        Bundle args = getArguments();
+        if (args == null) {
+            return;
+        }
+
+        String action = args.getString("action");
+
+        CURRENT_ACTION = action;
+
+        if (ACTION_EDIT_NOTE.equals(action)) {
+            Note note = args.getParcelable("note");
+            setTheNote(note);
+        }
+
+    }
+
+    private void setTheNote(Note note) {
+
+        titleNotesAdd.setText(note.getTitle());
+        knife.fromHtml(note.getContent());
+        titleNotesAdd.setTextColor(note.getColorOfNote());
+
     }
 
     public AddNotesActivity getAddNotesActivity() {
@@ -98,8 +146,28 @@ public class AddNotesFragment extends Fragment {
             return;
         }
 
-
+        mListener.onSaveToDatabase(title, content);
     }
+
+    public void saveToDatabaseOnEdit() {
+        String title = titleNotesAdd.getText().toString().trim();
+        String content = knife.toHtml().trim();
+
+        if (TextUtils.isEmpty(title) && TextUtils.isEmpty(content)) {
+            mListener.deleteNoteFromDb();
+        } else {
+            mListener.updateNote(title, content);
+        }
+    }
+
+    public interface AddNotesListener {
+        void onSaveToDatabase(String title, String content);
+
+        void deleteNoteFromDb();
+
+        void updateNote(String title, String content);
+    }
+
 
     @OnClick({R.id.bold, R.id.italic, R.id.underline, R.id.strikethrough, R.id.bullet, R.id.quote, R.id.link, R.id.clear, R.id.undo, R.id.redo})
     public void onFormatClicked(View view) {
@@ -136,6 +204,16 @@ public class AddNotesFragment extends Fragment {
                 break;
         }
 
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof AddNotesListener) {
+            mListener = (AddNotesListener) context;
+        } else {
+            throw new ClassCastException(context.toString() + " must implement AddNotesListener");
+        }
     }
 
     private void showLinkDialog() {
@@ -179,7 +257,6 @@ public class AddNotesFragment extends Fragment {
     }
 
     public void tintIcon(ImageView imageView, int color) {
-        Context context = getAddNotesActivity();
 
         Drawable normalDrawable = imageView.getDrawable();
         Drawable wrapDrawable = DrawableCompat.wrap(normalDrawable);

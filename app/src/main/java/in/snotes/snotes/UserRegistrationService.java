@@ -17,8 +17,8 @@ import java.util.Objects;
 
 public class UserRegistrationService extends IntentService {
 
-    private static final String ACTION_REGISTER_USER = "action-register-user";
-    private static final String ACTION_ADD_NOTE_TO_DB = "action-add-note-to-db";
+    public static final String ACTION_REGISTER_USER = "action-register-user";
+    public static final String ACTION_ADD_NOTE_TO_DB = "action-add-note-to-db";
 
     private FirebaseFirestore mFirebaseFirestore;
     private FirebaseAuth mFirebaseAuth;

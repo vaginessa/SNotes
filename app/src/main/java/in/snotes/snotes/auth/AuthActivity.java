@@ -10,7 +10,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import in.snotes.snotes.R;
 import in.snotes.snotes.UserRegistrationService;
-import in.snotes.snotes.notes.MainActivity;
+import in.snotes.snotes.notes.NotesMainActivity;
 
 public class AuthActivity extends AppCompatActivity implements AuthFragment.AuthListener, LoginFragment.LoginListener, RegisterFragment.RegisterListener {
 
@@ -58,9 +58,9 @@ public class AuthActivity extends AppCompatActivity implements AuthFragment.Auth
                 });
     }
 
-    // navigating to MainActivity after registering and logging in
+    // navigating to NotesMainActivity after registering and logging in
     private void goToMainActivity() {
-        Intent i = new Intent(AuthActivity.this, MainActivity.class);
+        Intent i = new Intent(AuthActivity.this, NotesMainActivity.class);
         startActivity(i);
         finish();
         return;
@@ -95,6 +95,7 @@ public class AuthActivity extends AppCompatActivity implements AuthFragment.Auth
 
     private void startRegistrationService(String name, String uid) {
         Intent i = new Intent(AuthActivity.this, UserRegistrationService.class);
+        i.setAction(UserRegistrationService.ACTION_REGISTER_USER);
         i.putExtra("user-uid", uid);
         i.putExtra("user-name", name);
         startService(i);
