@@ -29,6 +29,7 @@ public class Note implements Parcelable {
         this.documentReference = documentReference;
     }
 
+    public Note() {}
 
     // The getters and setters are only for the Firebase Firestore
     // Use the builder to build the note as its more convenient

@@ -1,8 +1,6 @@
 package in.snotes.snotes.notes;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -19,13 +17,17 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.Objects;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import in.snotes.snotes.R;
+import in.snotes.snotes.about.AboutActivity;
 import in.snotes.snotes.auth.AuthActivity;
+import in.snotes.snotes.locked.LockedActivity;
 import in.snotes.snotes.model.Note;
+import in.snotes.snotes.settings.SettingsActivity;
+import in.snotes.snotes.starred.StarredActivity;
+import in.snotes.snotes.utils.SharedPrefsHelper;
+import in.snotes.snotes.utils.Utils;
 
 public class NotesMainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, NotesListFragment.NotesListFragmentListener {
@@ -95,6 +97,7 @@ public class NotesMainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            showSettings();
             return true;
         }
 
@@ -112,23 +115,37 @@ public class NotesMainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        switch (id) {
+            case R.id.nav_favourites:
+                Intent favIntent = new Intent(NotesMainActivity.this, StarredActivity.class);
+                startActivity(favIntent);
+                break;
+            case R.id.nav_locked:
+                Intent lockedIntent = new Intent(NotesMainActivity.this, LockedActivity.class);
+                startActivity(lockedIntent);
+                break;
+            case R.id.nav_settings:
+                showSettings();
+                break;
+            case R.id.nav_about:
+                showAbout();
+                break;
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void showAbout() {
+        Intent i = new Intent(this, AboutActivity.class);
+        startActivity(i);
+    }
+
+    private void showSettings() {
+
+        Intent i = new Intent(this, SettingsActivity.class);
+        startActivity(i);
     }
 
     @Override
@@ -140,7 +157,6 @@ public class NotesMainActivity extends AppCompatActivity
 
     @Override
     public void onNoteClicked(Note note) {
-
         if (note.isLocked()) {
 
             new MaterialDialog.Builder(this)
@@ -149,38 +165,21 @@ public class NotesMainActivity extends AppCompatActivity
                     .input("0000", null, (dialog, input) -> {
                         // Do something
                         // adding passowrd to sharedPref
-                        SharedPreferences sharedPreferences = getSharedPreferences("snotes-prefs", Context.MODE_PRIVATE);
-                        String pin = sharedPreferences.getString("pin", "0000");
+                        int pin = SharedPrefsHelper.getPin();
 
-                        String inputPassword = String.valueOf(input);
+                        int inputPassword = Integer.parseInt(input.toString());
 
-                        if (!Objects.equals(pin, inputPassword)) {
-                            showPinError();
+                        if (pin == inputPassword) {
+                            Utils.goToAddNotes(note, NotesMainActivity.this);
                         } else {
-                            startAddNotesActivity(note);
+                            Utils.showPinError(NotesMainActivity.this);
                         }
+
                     }).show();
 
         } else {
-            startAddNotesActivity(note);
+            Utils.goToAddNotes(note, NotesMainActivity.this);
         }
-
-    }
-
-    private void showPinError() {
-        new MaterialDialog.Builder(this)
-                .title("Wrong Password")
-                .content("You have entered the wrong password. Please try again")
-                .neutralText("Ok")
-                .show();
-    }
-
-    private void startAddNotesActivity(Note note) {
-        Intent i = new Intent(NotesMainActivity.this, AddNotesActivity.class);
-        i.putExtra("action", AddNotesFragment.ACTION_EDIT_NOTE);
-        i.putExtra("note", note);
-        i.putExtra("reference", note.getDocumentReference().getPath());
-        startActivity(i);
     }
 
     private void logoutUser() {

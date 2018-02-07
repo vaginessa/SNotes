@@ -3,14 +3,15 @@ package in.snotes.snotes.auth;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.firebase.auth.FirebaseAuth;
 
 import in.snotes.snotes.R;
-import in.snotes.snotes.UserRegistrationService;
 import in.snotes.snotes.notes.NotesMainActivity;
+import in.snotes.snotes.service.UserRegistrationService;
+import timber.log.Timber;
 
 public class AuthActivity extends AppCompatActivity implements AuthFragment.AuthListener, LoginFragment.LoginListener, RegisterFragment.RegisterListener {
 
@@ -44,18 +45,35 @@ public class AuthActivity extends AppCompatActivity implements AuthFragment.Auth
         navToRegister();
     }
 
+    private void authenticatingDialog() {
+        new MaterialDialog.Builder(this)
+                .title(R.string.progress_title)
+                .content(R.string.please_content)
+                .progress(true, 0)
+                .show();
+    }
+
     // logging in user with Firebase
     @Override
     public void loginUser(String email, String password) {
+        authenticatingDialog();
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show();
+                        startSyncServiceOnLogin();
                         goToMainActivity();
                     } else {
-                        Log.d(TAG, "Login error " + task.getException().getMessage());
+                        Timber.d("Login error %s", task.getException().getMessage());
                     }
                 });
+    }
+
+    private void startSyncServiceOnLogin() {
+        // this is called because we want to sync in users preferences from backup
+        Intent i = new Intent(this, UserRegistrationService.class);
+        i.setAction(UserRegistrationService.ACTION_USER_LOGGED_IN_SYNC);
+        startService(i);
     }
 
     // navigating to NotesMainActivity after registering and logging in
@@ -81,6 +99,7 @@ public class AuthActivity extends AppCompatActivity implements AuthFragment.Auth
 
     @Override
     public void registerUser(String name, String email, String password) {
+        authenticatingDialog();
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -88,7 +107,7 @@ public class AuthActivity extends AppCompatActivity implements AuthFragment.Auth
                         startRegistrationService(name, task.getResult().getUser().getUid());
                         goToMainActivity();
                     } else {
-                        Log.e(TAG, "Error registering user " + task.getException().getMessage());
+                        Timber.e("Error registering user %s", task.getException().getMessage());
                     }
                 });
     }

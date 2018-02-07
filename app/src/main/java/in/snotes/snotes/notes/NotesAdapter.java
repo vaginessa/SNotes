@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import in.snotes.snotes.R;
-import in.snotes.snotes.Utils;
+import in.snotes.snotes.utils.Utils;
 import in.snotes.snotes.model.Note;
 
 
@@ -107,10 +107,14 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
 
             if (!note.isLocked()) {
                 imgLocked.setVisibility(View.GONE);
+            } else {
+                imgLocked.setVisibility(View.VISIBLE);
             }
 
             if (!note.isStarred()) {
                 imgStarred.setVisibility(View.GONE);
+            } else {
+                imgStarred.setVisibility(View.VISIBLE);
             }
 
             String date = Utils.getDate(note.getCreatedTimestamp());

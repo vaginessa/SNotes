@@ -1,6 +1,7 @@
 package in.snotes.snotes.notes;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,7 +10,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.text.InputType;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +28,7 @@ import butterknife.Unbinder;
 import in.snotes.snotes.R;
 import in.snotes.snotes.model.Note;
 import io.github.mthli.knife.KnifeText;
+import timber.log.Timber;
 
 public class AddNotesFragment extends Fragment {
 
@@ -62,6 +63,8 @@ public class AddNotesFragment extends Fragment {
     public static final String ACTION_NEW_NOTE = "action-new-note";
     public static final String ACTION_EDIT_NOTE = "action-edit-note";
 
+    private int defaultColor = -16777216;
+
     private static String CURRENT_ACTION;
 
     public static AddNotesFragment getInstance(String action, Note note) {
@@ -78,6 +81,17 @@ public class AddNotesFragment extends Fragment {
         AddNotesFragment addNotesFragment = new AddNotesFragment();
 
         Bundle args = new Bundle();
+        args.putString("action", action);
+        addNotesFragment.setArguments(args);
+
+        return addNotesFragment;
+    }
+
+    public static AddNotesFragment getInstance(String action, String content) {
+        AddNotesFragment addNotesFragment = new AddNotesFragment();
+
+        Bundle args = new Bundle();
+        args.putString("content", content);
         args.putString("action", action);
         addNotesFragment.setArguments(args);
 
@@ -111,9 +125,24 @@ public class AddNotesFragment extends Fragment {
 
         if (ACTION_EDIT_NOTE.equals(action)) {
             Note note = args.getParcelable("note");
+            if (note == null) {
+                Timber.e("Error. There is no note on edit");
+                return;
+            }
             setTheNote(note);
+            changeColor(note.getColorOfNote());
+        } else if (ACTION_NEW_NOTE.equals(action)) {
+            changeColor(defaultColor);
+        } else if (Intent.ACTION_SEND.equals(action)) {
+            String content = args.getString("content");
+            setContentOnRecieve(content);
         }
 
+    }
+
+    // this is used when there is an intent incoming from other apps
+    private void setContentOnRecieve(String content) {
+        knife.fromHtml(content);
     }
 
     private void setTheNote(Note note) {
@@ -139,8 +168,8 @@ public class AddNotesFragment extends Fragment {
         String title = titleNotesAdd.getText().toString().trim();
         String content = knife.toHtml().trim();
 
-        Log.d(TAG, "title is " + title);
-        Log.d(TAG, "Content is " + content);
+        Timber.d("title is %s", title);
+        Timber.d("Content is %s", content);
 
         if (TextUtils.isEmpty(title) && TextUtils.isEmpty(content)) {
             return;

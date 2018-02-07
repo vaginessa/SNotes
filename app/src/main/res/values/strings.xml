@@ -10,4 +10,30 @@
     <string name="register">Register</string>
     <string name="color_title">Choose a color</string>
     <string name="colors">choose a color</string>
+    <string name="set_remainder">Set Remainder</string>
+    <string name="delete">Delete</string>
+    <string name="export">Export as .txt</string>
+    <string name="copy">Copy</string>
+    <string name="share">Share</string>
+    <string name="notification_channel_display_title">Notes Remainder</string>
+    <string name="send_to">Send To</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!--strings for the about page-->
+    <string name="version_title">Version</string>
+    <string name="rate_title">Rate</string>
+    <string name="rate_desc">Leave a rating in Google Play</string>
+    <string name="report_title">Report</string>
+    <string name="report_desc">Report bugs, request new features or just get in touch</string>
+    <string name="share_title">Share</string>
+    <string name="licenses">Licenses</string>
+    <string name="author_name">Sriram R</string>
+    <string name="author_location">Noida, India</string>
+    <string name="follow_on_github">Follow on Github</string>
+    <string name="donate">Donate</string>
+    <string name="donate_desc">If you like this free app and if you liked it, consider supporting me</string>
+    <string name="progress_title">Please Wait</string>
+    <string name="please_content">Please wait while we authenticate you</string>
+
+
 </resources>
