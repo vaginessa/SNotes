@@ -4,6 +4,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <io.github.mthli.knife.KnifeText
+        android:id="@+id/edt_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title_notes_add"
+        android:background="@android:color/transparent"
+        android:hint="Content"
+        android:padding="12dp"
+        android:textSize="20sp"
+        app:bulletColor="@color/colorAccent"
+        app:bulletGapWidth="4dp"
+        app:bulletRadius="4dp"
+        app:historyEnable="true"
+        app:historySize="20" />
+
+    <EditText
+        android:id="@+id/title_notes_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:hint="Title"
+        android:minLines="1"
+        android:padding="12dp"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
     <HorizontalScrollView
         android:id="@+id/tools"
         android:layout_width="match_parent"
@@ -108,33 +134,5 @@
                 android:src="@drawable/ic_format_clear" />
 
         </LinearLayout>
-
     </HorizontalScrollView>
-
-
-    <io.github.mthli.knife.KnifeText
-        android:id="@+id/edt_content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/title_notes_add"
-        android:background="@android:color/transparent"
-        android:hint="Content"
-        android:padding="12dp"
-        android:textSize="20sp"
-        app:historyEnable="true"
-        app:historySize="20" />
-
-    <EditText
-        android:id="@+id/title_notes_add"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:hint="Title"
-        android:minLines="1"
-        android:padding="12dp"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-
-
 </RelativeLayout>
-

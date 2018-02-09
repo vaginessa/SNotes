@@ -24,6 +24,16 @@ public class SharedPrefsHelper {
         return prefs.getBoolean(AppConstants.PREFS_IS_PIN_SET, false);
     }
 
+    public static boolean isNightMode() {
+        return prefs.getBoolean(AppConstants.PREFS_IS_NIGHT_MODE, false);
+    }
+
+    public static void setNightMode(boolean isNightMode) {
+        prefs.edit()
+                .putBoolean(AppConstants.PREFS_IS_NIGHT_MODE, isNightMode)
+                .apply();
+    }
+
     public static void setIsPinSet(boolean isPinSet) {
         prefs.edit()
                 .putBoolean(AppConstants.PREFS_IS_PIN_SET, isPinSet)

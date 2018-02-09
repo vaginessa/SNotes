@@ -5,6 +5,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.Build;
+import android.support.v7.app.AppCompatDelegate;
 
 import com.facebook.stetho.Stetho;
 
@@ -43,6 +44,7 @@ public class SNotesApplication extends Application {
 
         // instantiating SharedPrefs helper
         SharedPrefsHelper.instantiate(this);
+
 
     }
 }

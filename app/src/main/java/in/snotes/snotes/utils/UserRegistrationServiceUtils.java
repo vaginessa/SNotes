@@ -152,10 +152,29 @@ public class UserRegistrationServiceUtils {
                 return;
             }
 
-            boolean inPinSet = task.getResult().getBoolean(AppConstants.PREFS_IS_PIN_SET);
-            int pin = Integer.parseInt(task.getResult().get(AppConstants.PREFS_PIN).toString());
+            if (task.getResult() == null) {
+                Timber.e("result is null %s", task.getResult());
+            }
 
-            SharedPrefsHelper.setIsPinSet(inPinSet);
+            DocumentSnapshot result = task.getResult();
+
+            boolean isPinSet;
+
+            if (result.contains(AppConstants.PREFS_IS_PIN_SET)){
+                isPinSet = task.getResult().getBoolean(AppConstants.PREFS_IS_PIN_SET);
+            }else{
+                isPinSet = false;
+            }
+
+            int pin;
+
+            if (result.contains(AppConstants.PREFS_PIN)){
+                pin = Integer.parseInt(task.getResult().get(AppConstants.PREFS_PIN).toString());
+            }else{
+                pin = 0;
+            }
+
+            SharedPrefsHelper.setIsPinSet(isPinSet);
             SharedPrefsHelper.setPin(pin);
 
         });

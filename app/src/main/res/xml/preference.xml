@@ -8,5 +8,4 @@
         android:summaryOn="Protection On"
         android:title="Note Password" />
 
-
 </PreferenceScreen>

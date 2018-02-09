@@ -33,4 +33,5 @@ public class AppConstants {
     public static final String PREFS_PIN = "pin";
     public static final String PREFS_IS_PIN_SET = "isPinSet";
     public static final String NAME = "name";
+    public static final String PREFS_IS_NIGHT_MODE = "isNightMode";
 }

@@ -64,6 +64,7 @@ public class Utils {
 
         for (DocumentSnapshot document : documents) {
             Note note = getNote(document);
+            note.setDocumentReference(document.getReference());
             notes.add(note);
         }
 
@@ -80,7 +81,8 @@ public class Utils {
     }
 
     public static Note getNote(DocumentSnapshot document) {
-        Note note = new Note.Builder()
+
+        return new Note.Builder()
                 .title(document.getString(AppConstants.TITLE))
                 .content(document.getString(AppConstants.CONTENT))
                 .createdTime(document.getLong(AppConstants.CREATED_TIMESTAMP))
@@ -91,8 +93,6 @@ public class Utils {
                 .colorOfNote(Integer.parseInt(document.get(AppConstants.COLOR_OF_NOTE).toString()))
                 .reference(document.getReference())
                 .buildNote();
-
-        return note;
     }
 
     public static List<Object> getAboutItems(Context context) {
@@ -111,4 +111,6 @@ public class Utils {
         return aboutItems;
 
     }
+
+
 }

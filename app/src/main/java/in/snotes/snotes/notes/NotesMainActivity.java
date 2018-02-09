@@ -12,6 +12,8 @@ import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.firebase.auth.FirebaseAuth;
@@ -54,6 +56,13 @@ public class NotesMainActivity extends AppCompatActivity
             finish();
             return;
         }
+
+        View headerView = navigationView.getHeaderView(0);
+        TextView tvUserName = headerView.findViewById(R.id.tv_nav_user_name);
+        TextView tvUserEmail = headerView.findViewById(R.id.tv_nav_user_email);
+
+        tvUserName.setText(mFirebaseAuth.getCurrentUser().getDisplayName());
+        tvUserEmail.setText(mFirebaseAuth.getCurrentUser().getEmail());
 
         setSupportActionBar(toolbar);
 

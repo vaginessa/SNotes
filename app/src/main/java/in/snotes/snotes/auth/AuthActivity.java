@@ -18,6 +18,8 @@ public class AuthActivity extends AppCompatActivity implements AuthFragment.Auth
     private FirebaseAuth mAuth;
     private static final String TAG = "AuthActivity";
 
+    MaterialDialog authDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,11 +48,13 @@ public class AuthActivity extends AppCompatActivity implements AuthFragment.Auth
     }
 
     private void authenticatingDialog() {
-        new MaterialDialog.Builder(this)
+        authDialog = new MaterialDialog.Builder(this)
                 .title(R.string.progress_title)
                 .content(R.string.please_content)
                 .progress(true, 0)
-                .show();
+                .build();
+
+        authDialog.show();
     }
 
     // logging in user with Firebase
@@ -61,6 +65,7 @@ public class AuthActivity extends AppCompatActivity implements AuthFragment.Auth
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show();
+                        authDialog.dismiss();
                         startSyncServiceOnLogin();
                         goToMainActivity();
                     } else {
@@ -104,6 +109,7 @@ public class AuthActivity extends AppCompatActivity implements AuthFragment.Auth
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         // start the IntentService
+                        authDialog.dismiss();
                         startRegistrationService(name, task.getResult().getUser().getUid());
                         goToMainActivity();
                     } else {

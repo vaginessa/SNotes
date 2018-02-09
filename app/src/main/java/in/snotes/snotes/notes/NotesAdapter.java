@@ -16,8 +16,8 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import in.snotes.snotes.R;
-import in.snotes.snotes.utils.Utils;
 import in.snotes.snotes.model.Note;
+import in.snotes.snotes.utils.Utils;
 
 
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> {
@@ -53,6 +53,17 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
     public void setNotes(ArrayList<Note> notes) {
         this.notesList = notes;
         notifyDataSetChanged();
+    }
+
+    public void removeNote(int position) {
+        notesList.remove(position);
+        notifyItemRemoved(position);
+    }
+
+
+    public void restoreNote(Note note, int position) {
+        notesList.add(position, note);
+        notifyItemInserted(position);
     }
 
     public interface NotesListener {
