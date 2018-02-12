@@ -33,9 +33,11 @@ public class NotesUtils {
             mFirebaseAuth = FirebaseAuth.getInstance();
         }
 
-        noteCollection = mFirebaseFirestore.collection(AppConstants.COLLECTION_USERS)
-                .document(mFirebaseAuth.getCurrentUser().getUid())
-                .collection(AppConstants.COLLECTION_NOTES);
+        if (mFirebaseAuth.getCurrentUser() != null) {
+            noteCollection = mFirebaseFirestore.collection(AppConstants.COLLECTION_USERS)
+                    .document(mFirebaseAuth.getCurrentUser().getUid())
+                    .collection(AppConstants.COLLECTION_NOTES);
+        }
 
     }
 
