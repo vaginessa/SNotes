@@ -245,6 +245,8 @@ public class AddNotesFragment extends Fragment {
         }
     }
 
+
+
     private void showLinkDialog() {
         final int start = knife.getSelectionStart();
         final int end = knife.getSelectionEnd();

@@ -67,7 +67,16 @@ public class NotesListFragment extends Fragment implements NotesAdapter.NotesLis
 
         adapter = new NotesAdapter(getContext(), this);
 
-        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        boolean isTablet = getContext().getResources().getBoolean(R.bool.isTablet);
+
+        StaggeredGridLayoutManager layoutManager;
+
+        if (isTablet) {
+            layoutManager = new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL);
+        } else {
+            layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        }
+
         rvNotesList.setLayoutManager(layoutManager);
         rvNotesList.setAdapter(adapter);
 
@@ -85,7 +94,7 @@ public class NotesListFragment extends Fragment implements NotesAdapter.NotesLis
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                if (direction == ItemTouchHelper.LEFT){
+                if (direction == ItemTouchHelper.LEFT) {
                     int position = viewHolder.getAdapterPosition();
                     Note note = notes.remove(position);
                     adapter.removeNote(position);

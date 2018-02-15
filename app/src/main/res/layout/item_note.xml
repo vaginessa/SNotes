@@ -54,7 +54,7 @@
                 android:layout_marginEnd="6dp"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="8dp"
-                android:src="@drawable/ic_lock_white" />
+                app:srcCompat="@drawable/ic_lock_white" />
 
             <ImageView
                 android:id="@+id/img_starred"
@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="12dp"
                 android:layout_marginTop="8dp"
-                android:src="@drawable/ic_star_closed_white" />
+                app:srcCompat="@drawable/ic_star_closed_white" />
         </LinearLayout>
 
 

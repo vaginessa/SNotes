@@ -51,9 +51,6 @@ dependencies {
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
     implementation 'com.afollestad.material-dialogs:commons:0.9.6.0'
 
-    //stetho
-    implementation 'com.facebook.stetho:stetho:1.5.0'
-
     implementation 'com.android.support:multidex:1.0.2'
 
     implementation 'com.android.support:preference-v14:27.0.2'
@@ -67,7 +64,6 @@ dependencies {
     // license dialog
     compile 'com.github.marcoscgdev:EasyLicensesDialog:2.0.0'
 
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'

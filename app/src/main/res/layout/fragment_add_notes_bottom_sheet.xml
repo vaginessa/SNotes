@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -9,24 +10,24 @@
     <LinearLayout
         android:id="@+id/layout_remainder"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/listPreferredItemHeight"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?attr/selectableItemBackground"
         android:orientation="horizontal"
-        android:paddingBottom="8dp"
         android:paddingLeft="@dimen/activity_margin"
-        android:paddingRight="@dimen/activity_margin"
-        android:paddingTop="8dp">
+        android:paddingRight="@dimen/activity_margin">
 
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
             android:layout_marginEnd="32dp"
-            android:src="@drawable/ic_remainder"
-            android:tint="#737373" />
+            android:tint="#737373"
+            app:srcCompat="@drawable/ic_remainder" />
 
         <TextView
+            android:id="@+id/sheet_tv_remaider"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -39,22 +40,21 @@
     <LinearLayout
         android:id="@+id/layout_delete"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/listPreferredItemHeight"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?attr/selectableItemBackground"
         android:orientation="horizontal"
-        android:paddingBottom="8dp"
         android:paddingLeft="@dimen/activity_margin"
-        android:paddingRight="@dimen/activity_margin"
-        android:paddingTop="8dp">
+        android:paddingRight="@dimen/activity_margin">
 
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
             android:layout_marginEnd="32dp"
-            android:src="@drawable/ic_delete"
-            android:tint="#737373" />
+            android:tint="#737373"
+            app:srcCompat="@drawable/ic_delete" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -69,22 +69,21 @@
     <LinearLayout
         android:id="@+id/layout_export"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/listPreferredItemHeight"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?attr/selectableItemBackground"
         android:orientation="horizontal"
-        android:paddingBottom="8dp"
         android:paddingLeft="@dimen/activity_margin"
-        android:paddingRight="@dimen/activity_margin"
-        android:paddingTop="8dp">
+        android:paddingRight="@dimen/activity_margin">
 
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
             android:layout_marginEnd="32dp"
-            android:src="@drawable/ic_export"
-            android:tint="#737373" />
+            android:tint="#737373"
+            app:srcCompat="@drawable/ic_export" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -99,22 +98,21 @@
     <LinearLayout
         android:id="@+id/layout_copy"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/listPreferredItemHeight"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?attr/selectableItemBackground"
         android:orientation="horizontal"
-        android:paddingBottom="8dp"
         android:paddingLeft="@dimen/activity_margin"
-        android:paddingRight="@dimen/activity_margin"
-        android:paddingTop="8dp">
+        android:paddingRight="@dimen/activity_margin">
 
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
             android:layout_marginEnd="32dp"
-            android:src="@drawable/ic_copy"
-            android:tint="#737373" />
+            android:tint="#737373"
+            app:srcCompat="@drawable/ic_copy" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -129,22 +127,21 @@
     <LinearLayout
         android:id="@+id/layout_share"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/listPreferredItemHeight"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?attr/selectableItemBackground"
         android:orientation="horizontal"
-        android:paddingBottom="8dp"
         android:paddingLeft="@dimen/activity_margin"
-        android:paddingRight="@dimen/activity_margin"
-        android:paddingTop="8dp">
+        android:paddingRight="@dimen/activity_margin">
 
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
             android:layout_marginEnd="32dp"
-            android:src="@drawable/ic_share"
-            android:tint="#737373" />
+            android:tint="#737373"
+            app:srcCompat="@drawable/ic_share" />
 
         <TextView
             android:layout_width="wrap_content"

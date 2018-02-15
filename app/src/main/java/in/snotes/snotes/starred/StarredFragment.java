@@ -80,7 +80,9 @@ public class StarredFragment extends Fragment implements NotesAdapter.NotesListe
                         return;
                     }
                     setDataToRv(documentSnapshots.getDocuments());
-                    layoutEmpty.setVisibility(View.GONE);
+                    if (layoutEmpty.getVisibility() == View.VISIBLE || layoutEmpty.getVisibility() == View.INVISIBLE) {
+                        layoutEmpty.setVisibility(View.GONE);
+                    }
                 });
 
     }

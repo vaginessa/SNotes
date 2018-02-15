@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?attr/selectableItemBackground"
     android:clickable="true"
     android:foreground="?attr/selectableItemBackground"
@@ -16,7 +17,7 @@
         android:layout_gravity="center"
         android:layout_marginStart="16dp"
         android:contentDescription="About Logo"
-        android:src="@drawable/ic_note" />
+        app:srcCompat="@drawable/ic_note" />
 
     <LinearLayout
         android:id="@+id/layout_about"
@@ -43,7 +44,6 @@
             android:layout_height="wrap_content"
             android:textSize="14sp"
             tools:text="1.1.1" />
-
 
     </LinearLayout>
 

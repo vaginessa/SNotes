@@ -15,7 +15,6 @@ import timber.log.Timber;
 
 public class AuthActivity extends AppCompatActivity implements AuthFragment.AuthListener, LoginFragment.LoginListener, RegisterFragment.RegisterListener {
 
-    private FirebaseAuth mAuth;
     private static final String TAG = "AuthActivity";
 
     MaterialDialog authDialog;
@@ -24,8 +23,6 @@ public class AuthActivity extends AppCompatActivity implements AuthFragment.Auth
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
-
-        mAuth = FirebaseAuth.getInstance();
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
@@ -61,6 +58,7 @@ public class AuthActivity extends AppCompatActivity implements AuthFragment.Auth
     @Override
     public void loginUser(String email, String password) {
         authenticatingDialog();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -105,6 +103,7 @@ public class AuthActivity extends AppCompatActivity implements AuthFragment.Auth
     @Override
     public void registerUser(String name, String email, String password) {
         authenticatingDialog();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {

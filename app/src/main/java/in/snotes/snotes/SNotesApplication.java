@@ -5,9 +5,6 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.Build;
-import android.support.v7.app.AppCompatDelegate;
-
-import com.facebook.stetho.Stetho;
 
 import in.snotes.snotes.utils.AppConstants;
 import in.snotes.snotes.utils.NotesUtils;
@@ -19,7 +16,7 @@ public class SNotesApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Stetho.initializeWithDefaults(this);
+
         Timber.plant(new Timber.DebugTree());
 
         NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);

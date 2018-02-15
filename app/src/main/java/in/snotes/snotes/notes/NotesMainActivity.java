@@ -1,6 +1,7 @@
 package in.snotes.snotes.notes;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -10,6 +11,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,6 +32,7 @@ import in.snotes.snotes.settings.SettingsActivity;
 import in.snotes.snotes.starred.StarredActivity;
 import in.snotes.snotes.utils.SharedPrefsHelper;
 import in.snotes.snotes.utils.Utils;
+import timber.log.Timber;
 
 public class NotesMainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, NotesListFragment.NotesListFragmentListener {
@@ -40,6 +43,10 @@ public class NotesMainActivity extends AppCompatActivity
     NavigationView navigationView;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawer;
+
+    private boolean mIsTwoPane = false;
+
+    private static final String TAG = "NotesMainActivity";
 
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
 
@@ -56,6 +63,11 @@ public class NotesMainActivity extends AppCompatActivity
             finish();
             return;
         }
+
+        int width = Resources.getSystem().getDisplayMetrics().widthPixels;
+        int height = Resources.getSystem().getDisplayMetrics().heightPixels;
+
+        Timber.i("Width is %s and height is %s", String.valueOf(width), String.valueOf(height));
 
         View headerView = navigationView.getHeaderView(0);
         TextView tvUserName = headerView.findViewById(R.id.tv_nav_user_name);
@@ -152,7 +164,6 @@ public class NotesMainActivity extends AppCompatActivity
     }
 
     private void showSettings() {
-
         Intent i = new Intent(this, SettingsActivity.class);
         startActivity(i);
     }
