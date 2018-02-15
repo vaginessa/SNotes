@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="titleTextSize">30sp</dimen>
+    <dimen name="contentTextSize">34sp</dimen>
+
+    <dimen name="noteItemTitle">34sp</dimen>
+    <dimen name="noteItemContent">30sp</dimen>
+    <dimen name="noteItemDate">24sp</dimen>
+
+    <dimen name="fontIconSize">88dp</dimen>
+
+    <dimen name="textSize">18sp</dimen>
+
+    <dimen name="bottomSheetImage">38dp</dimen>
+</resources>

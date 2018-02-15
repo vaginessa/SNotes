@@ -24,7 +24,7 @@
             android:layout_marginStart="12dp"
             android:layout_marginTop="8dp"
             android:textColor="@android:color/white"
-            android:textSize="22sp"
+            android:textSize="@dimen/noteItemTitle"
             tools:text="This is title" />
 
         <TextView
@@ -36,7 +36,7 @@
             android:layout_marginStart="12dp"
             android:layout_marginTop="8dp"
             android:textColor="@android:color/white"
-            android:textSize="18sp"
+            android:textSize="@dimen/noteItemContent"
             tools:text="This is the content here. How amazing is it in here huh? I really do hope it fits perfectly in" />
 
         <LinearLayout
@@ -77,7 +77,7 @@
             android:layout_marginStart="12dp"
             android:layout_marginTop="8dp"
             android:textColor="@android:color/white"
-            android:textSize="14sp"
+            android:textSize="@dimen/noteItemDate"
             tools:text="Feb 1, 04:57 PM" />
 
     </RelativeLayout>

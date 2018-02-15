@@ -59,7 +59,15 @@ public class StarredFragment extends Fragment implements NotesAdapter.NotesListe
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        boolean isTablet = getResources().getBoolean(R.bool.isTablet);
+        int spanCount;
+        if (isTablet) {
+            spanCount = 4;
+        } else {
+            spanCount = 2;
+        }
+
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(spanCount, StaggeredGridLayoutManager.VERTICAL);
         adapter = new NotesAdapter(getFavouritesActivity(), this);
 
         rvFavs.setLayoutManager(layoutManager);

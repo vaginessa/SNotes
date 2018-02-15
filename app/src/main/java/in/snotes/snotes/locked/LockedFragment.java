@@ -57,7 +57,17 @@ public class LockedFragment extends Fragment implements NotesAdapter.NotesListen
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+
+        boolean isTablet = getContext().getResources().getBoolean(R.bool.isTablet);
+
+        int span;
+        if (isTablet) {
+            span = 4;
+        } else {
+            span = 2;
+        }
+
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(span, StaggeredGridLayoutManager.VERTICAL);
         adapter = new NotesAdapter(getLockedActivity(), this);
 
         rvLocked.setLayoutManager(layoutManager);

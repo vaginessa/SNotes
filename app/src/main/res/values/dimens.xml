@@ -6,4 +6,18 @@
     <dimen name="nav_header_height">176dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="activity_margin">16dp</dimen>
+
+    <dimen name="titleTextSize">20sp</dimen>
+    <dimen name="contentTextSize">24sp</dimen>
+
+    <dimen name="noteItemTitle">22sp</dimen>
+    <dimen name="noteItemContent">18sp</dimen>
+    <dimen name="noteItemDate">14sp</dimen>
+
+    <dimen name="fontIconSize">48dp</dimen>
+    <dimen name="textSize">18sp</dimen>
+
+    <dimen name="bottomSheetImage">28dp</dimen>
+
 </resources>
+

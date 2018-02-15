@@ -12,7 +12,7 @@
         android:background="@android:color/transparent"
         android:hint="Content"
         android:padding="12dp"
-        android:textSize="20sp"
+        android:textSize="@dimen/contentTextSize"
         app:bulletColor="@color/colorAccent"
         app:bulletGapWidth="4dp"
         app:bulletRadius="4dp"
@@ -27,7 +27,7 @@
         android:hint="Title"
         android:minLines="1"
         android:padding="12dp"
-        android:textSize="24sp"
+        android:textSize="@dimen/titleTextSize"
         android:textStyle="bold" />
 
     <HorizontalScrollView
@@ -39,15 +39,15 @@
         android:scrollbars="none">
 
         <LinearLayout
-            android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:orientation="horizontal">
 
             <ImageButton
                 android:id="@+id/undo"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="@dimen/fontIconSize"
+                android:layout_height="@dimen/fontIconSize"
                 android:background="?android:selectableItemBackground"
                 android:contentDescription="@null"
                 android:scaleType="center"
@@ -55,8 +55,8 @@
 
             <ImageButton
                 android:id="@+id/redo"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="@dimen/fontIconSize"
+                android:layout_height="@dimen/fontIconSize"
                 android:background="?android:selectableItemBackground"
                 android:contentDescription="@null"
                 android:scaleType="center"
@@ -64,8 +64,8 @@
 
             <ImageButton
                 android:id="@+id/bold"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="@dimen/fontIconSize"
+                android:layout_height="@dimen/fontIconSize"
                 android:background="?android:selectableItemBackground"
                 android:contentDescription="@null"
                 android:scaleType="center"
@@ -73,8 +73,8 @@
 
             <ImageButton
                 android:id="@+id/italic"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="@dimen/fontIconSize"
+                android:layout_height="@dimen/fontIconSize"
                 android:background="?android:selectableItemBackground"
                 android:contentDescription="@null"
                 android:scaleType="center"
@@ -82,8 +82,8 @@
 
             <ImageButton
                 android:id="@+id/underline"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="@dimen/fontIconSize"
+                android:layout_height="@dimen/fontIconSize"
                 android:background="?android:selectableItemBackground"
                 android:contentDescription="@null"
                 android:scaleType="center"
@@ -91,8 +91,8 @@
 
             <ImageButton
                 android:id="@+id/strikethrough"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="@dimen/fontIconSize"
+                android:layout_height="@dimen/fontIconSize"
                 android:background="?android:selectableItemBackground"
                 android:contentDescription="@null"
                 android:scaleType="center"
@@ -100,8 +100,8 @@
 
             <ImageButton
                 android:id="@+id/bullet"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="@dimen/fontIconSize"
+                android:layout_height="@dimen/fontIconSize"
                 android:background="?android:selectableItemBackground"
                 android:contentDescription="@null"
                 android:scaleType="center"
@@ -109,8 +109,8 @@
 
             <ImageButton
                 android:id="@+id/quote"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="@dimen/fontIconSize"
+                android:layout_height="@dimen/fontIconSize"
                 android:background="?android:selectableItemBackground"
                 android:contentDescription="@null"
                 android:scaleType="center"
@@ -118,8 +118,8 @@
 
             <ImageButton
                 android:id="@+id/link"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="@dimen/fontIconSize"
+                android:layout_height="@dimen/fontIconSize"
                 android:background="?android:selectableItemBackground"
                 android:contentDescription="@null"
                 android:scaleType="center"
@@ -127,8 +127,8 @@
 
             <ImageButton
                 android:id="@+id/clear"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="@dimen/fontIconSize"
+                android:layout_height="@dimen/fontIconSize"
                 android:background="?android:selectableItemBackground"
                 android:contentDescription="@null"
                 android:scaleType="center"
